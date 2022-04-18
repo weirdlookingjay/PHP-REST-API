@@ -9,7 +9,8 @@ class TaskController
             if ($method == "GET") {
                 echo json_encode($this->gateway->getAll());
             } elseif ($method == "POST") {
-                echo "create";
+               $data =  (array) json_decode(file_get_contents("php://input"), true);
+               var_dump($data);
             } else {
                 $this->responseMethodNotAllowed("GET, PATCH, DELETE");
             }
