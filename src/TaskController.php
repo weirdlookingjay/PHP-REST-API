@@ -8,6 +8,8 @@ class TaskController
                 echo "index";
             } elseif ($method == "POST") {
                 echo "create";
+            } else {
+                $this->responseMethodNotAllowed("GET, PATCH, DELETE");
             }
         } else {
             switch ($method) {
@@ -21,5 +23,10 @@ class TaskController
                     echo "delete $id";
             }
         }
+    }
+
+    private function responseMethodNotAllowed(string $allowed_methods): void {
+        http_response_code(405);
+        header("Allow: $allowed_methods");
     }
 }
